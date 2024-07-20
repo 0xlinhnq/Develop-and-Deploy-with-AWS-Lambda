@@ -1,7 +1,6 @@
 org: linhnq
-app: serverless-todo-app
-service: serverless-todo-app
-frameworkVersion: "2.21.1"
+app: serverless-todo-linhnq
+service: serverless-todo-linhnq
 
 plugins:
   - serverless-iam-roles-per-function
@@ -24,8 +23,8 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs14.x
-  stage: ${opt:stage, 'dev'}
+  runtime: nodejs18.x
+  stage: ${opt:stage, 'prod'}
   region: ${opt:region, 'us-east-1'}
   profile: default
   tracing:
@@ -34,7 +33,7 @@ provider:
   environment:
     TODOS_TABLE: todo-app-${self:provider.stage}
     TODOS_CREATED_AT_INDEX: CreatedAtIndex
-    ATTACHMENT_S3_BUCKET: todo-app-images-hungnh52-${self:provider.stage}
+    ATTACHMENT_S3_BUCKET: serverless-todo-app-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
     PROJECT_NAME: "todo-app"
     INDEX_NAME: ${self:provider.environment.TODOS_CREATED_AT_INDEX}
